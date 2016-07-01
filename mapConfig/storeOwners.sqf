@@ -7,28 +7,28 @@
 // Notes: Gun and general stores have position of spawned crate, vehicle stores have an extra air spawn direction
 //
 // Array contents are as follows:
-// Name, Building Position, Desk Direction (or [Desk Direction, Front Offset]), Excluded Buttons
+// Name, Building Position (-1 to stay in original position), Desk Direction (or [Desk Direction, Front Offset], or [] to stay in original direction), Excluded Buttons
 storeOwnerConfig = compileFinal str
 [
-	["GenStore1", 6, 240, []],
-	["GenStore2", 6, 250, []],
-	["GenStore3", 6, 45, []],
-	["GenStore4", 0, 265, []],
-	["GenStore5", 5, 350, []],
+	["GenStore1", -1, [], []],
+	["GenStore2", -1, [], []],
+	["GenStore3", -1, [], []],
+	["GenStore4", -1, [], []],
+	["GenStore5", -1, [], []],
 
-	["GunStore1", 1, 0, []],
-	["GunStore2", 1, 75, []],
-	["GunStore3", 6, 135, []],
-	["GunStore4", 1, 65, []],
-	["GunStore5", 5, 83, []],
+	["GunStore1", -1, [], []],
+	["GunStore2", -1, [], []],
+	["GunStore3", -1, [], []],
+	["GunStore4", -1, [], []],
+	["GunStore5", -1, [], []],
 
 	// Buttons you can disable: "Land", "Armored", "Tanks", "Helicopters", "Boats", "Planes"
-	["VehStore1", 1, 75, []],
-	["VehStore2", 6, 45, ["Boats"]],
-	["VehStore3", 4, 250, ["Boats"]],
-	["VehStore4", 5, 155, ["Boats"]],
-	["VehStore5", 1e9, 69, ["Planes"]],
-	["VehStore6", 1e9, 282, ["Boats", "Planes"]]  //Dump
+	["VehStore1", -1, [], []],
+	["VehStore2", -1, [], []],
+	["VehStore3", -1, [], []],
+	["VehStore4", -1, [], ["Planes"]],
+	["VehStore5", -1, [], ["Planes"]],
+	["VehStore6", -1, [], ["Boats"]]
 ];
 
 // Outfits for store owners
@@ -44,12 +44,12 @@ storeOwnerConfigAppearance = compileFinal str
 	["GunStore2", [["weapon", ""], ["uniform", "U_O_SpecopsUniform_blk"]]],
 	["GunStore3", [["weapon", ""], ["uniform", "U_I_CombatUniform_tshirt"]]],
 	["GunStore4", [["weapon", ""], ["uniform", "U_IG_Guerilla1_1"]]],
-	['GunStore5', [['weapon', ''], ['uniform', 'U_I_CombatUniform_tshirt']]],
+	["GunStore5", [["weapon", ""], ["uniform", "U_I_CombatUniform_tshirt"]]],
 
 	["VehStore1", [["weapon", ""], ["uniform", "U_Competitor"]]],
 	["VehStore2", [["weapon", ""], ["uniform", "U_Competitor"]]],
 	["VehStore3", [["weapon", ""], ["uniform", "U_Competitor"]]],
 	["VehStore4", [["weapon", ""], ["uniform", "U_Competitor"]]],
-	['VehStore5', [['weapon', ''], ['uniform', 'U_Competitor']]],
-	['VehStore6', [['weapon', ''], ['uniform', 'U_Competitor']]]
+	["VehStore5", [["weapon", ""], ["uniform", "U_Competitor"]]],
+	["VehStore6", [["weapon", ""], ["uniform", "U_Competitor"]]]
 ];

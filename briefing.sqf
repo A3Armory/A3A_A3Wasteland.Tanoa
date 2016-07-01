@@ -214,7 +214,7 @@ player createDiaryRecord ["changelog",
 <br/>[Changed] Independent territory capture is now group-based
 <br/>[Changed] Towns blocked if more enemies than friendlies
 <br/>[Changed] Increased ammo/fuel/repair cargo for resupply trucks
-<br/>[Changed] Increased territory capture rewards for Altis
+<br/>[Changed] Increased territory capture rewards for Tanoa
 <br/>[Changed] Increased money mission rewards
 <br/>[Changed] Weapon loot in buildings now disabled by default
 <br/>[Changed] Mission crates loot was made more random
@@ -337,7 +337,7 @@ player createDiaryRecord ["changelog",
 [
 "v0.9b",
 "
-<br/>[Initial release] - Welcome to Altis!
+<br/>[Initial release] - Welcome to Tanoa!
 "
 ]];
 

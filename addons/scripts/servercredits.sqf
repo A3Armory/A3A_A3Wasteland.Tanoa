@@ -40,7 +40,7 @@ _onScreenTime = 10; 		//how long one role should stay on screen. Use value from 
 sleep 60; //Wait in seconds before the credits start after player IS ingame
  
 _role1 = "Welcome to";
-_role1names = ["A3Armory - A3Wasteland Altis"];
+_role1names = ["A3Armory - A3Wasteland Tanoa"];
 _role2 = "Server restarts every 6 hours";
 _role2names = ["3, 9, 15, 21 EST"];
 _role3 = "Player stats, and support @";
