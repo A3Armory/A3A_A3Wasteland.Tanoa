@@ -76,8 +76,7 @@ A3W_fnc_isBleeding = [_serverFunc, "fn_isBleeding.sqf"] call mf_compile;
 A3W_fnc_isFriendly = [_clientFunc, "fn_isFriendly.sqf"] call mf_compile;
 A3W_fnc_isUnconscious = [_serverFunc, "fn_isUnconscious.sqf"] call mf_compile;
 A3W_fnc_pushVehicle = [_serverFunc, "pushVehicle.sqf"] call mf_compile;
-A3W_fnc_setName = [_clientFunc, "fn_setName.sqf"] call mf_compile;
-A3W_fnc_setupAntiExplode = [_clientFunc, "fn_setupAntiExplode.sqf"] call mf_compile;
+A3W_fnc_setVehicleLoadout = [_serverFunc, "fn_setVehicleLoadout.sqf"] call mf_compile;
 A3W_fnc_towingHelper = [_serverFunc, "towingHelper.sqf"] call mf_compile;
 applyVehicleTexture = "client\systems\vehicleStore\applyVehicleTexture.sqf" call mf_compile;
 cargoToPairs = [_serverFunc, "cargoToPairs.sqf"] call mf_compile;
@@ -86,6 +85,7 @@ FAR_setKillerInfo = "addons\far_revive\FAR_setKillerInfo.sqf" call mf_compile;
 findSafePos = [_serverFunc, "findSafePos.sqf"] call mf_compile;
 fn_addScore = [_serverFunc, "fn_addScore.sqf"] call mf_compile;
 fn_addToPairs = [_serverFunc, "fn_addToPairs.sqf"] call mf_compile;
+fn_addTurretWeapons = [_serverFunc, "fn_addTurretWeapons.sqf"] call mf_compile;
 fn_allPlayers = [_serverFunc, "allPlayers.sqf"] call mf_compile;
 fn_boundingBoxReal = [_serverFunc, "fn_boundingBoxReal.sqf"] call mf_compile;
 fn_canGetIn = [_clientFunc, "fn_canGetIn.sqf"] call mf_compile;
@@ -107,6 +107,9 @@ fn_numToStr = [_serverFunc, "fn_numToStr.sqf"] call mf_compile;
 fn_remotePlayerSetup = [_clientFunc, "fn_remotePlayerSetup.sqf"] call mf_compile;
 fn_removeFromPairs = [_serverFunc, "fn_removeFromPairs.sqf"] call mf_compile;
 fn_removeTurretWeapons = [_serverFunc, "fn_removeTurretWeapons.sqf"] call mf_compile;
+fn_selectRandomNested = [_serverFunc, "fn_selectRandomNested.sqf"] call mf_compile;
+fn_selectRandomWeighted = [_serverFunc, "fn_selectRandomWeighted.sqf"] call mf_compile;
+fn_selectRandomWeightedPairs = [_serverFunc, "fn_selectRandomWeightedPairs.sqf"] call mf_compile;
 fn_setToPairs = [_serverFunc, "fn_setToPairs.sqf"] call mf_compile;
 fn_sortAlphabetically = [_serverFunc, "fn_sortAlphabetically.sqf"] call mf_compile;
 fn_splitString = [_serverFunc, "fn_splitString.sqf"] call mf_compile;
@@ -134,6 +137,8 @@ vehicleDammagedEvent = [_serverFunc, "vehicleDammagedEvent.sqf"] call mf_compile
 vehicleEngineEvent = [_serverFunc, "vehicleEngineEvent.sqf"] call mf_compile;
 vehicleHandleDamage = [_serverFunc, "vehicleHandleDamage.sqf"] call mf_compile;
 vehicleHitTracking = [_serverFunc, "vehicleHitTracking.sqf"] call mf_compile;
+
+A3W_fnc_reboot = {"Reboot" call BIS_fnc_endMission} call mf_compile;
 
 call compile preprocessFileLineNumbers "server\functions\mf_remote.sqf";
 

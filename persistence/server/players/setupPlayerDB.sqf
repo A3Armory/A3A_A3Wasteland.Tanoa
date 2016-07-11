@@ -28,16 +28,17 @@ A3W_fnc_checkPlayerFlag =
 {
 	(_this select 1) spawn
 	{
-		_UID = _this select 0;
-		_info = _this select 1;
-		_data = _this select 2;
-		_player = _this select 3;
+		params ["_UID", "_info", "_data", "_player"];
 
 		if (!isNull _player && alive _player && !(_player call A3W_fnc_isUnconscious)) then
 		{
-			_info pushBack ["BankMoney", _player getVariable ["bmoney", 0]];
-			_info pushBack ["Bounty", _player getVariable ["bounty", 0]];
-			_info pushBack ["BountyKills", _player getVariable ["bountyKills", 0]];
+			_info append
+			[
+				["BankMoney", _player getVariable ["bmoney", 0]],
+				["Bounty", _player getVariable ["bounty", 0]],
+				["BountyKills", _player getVariable ["bountyKills", 0]]
+			];
+
 			[_UID, _info, _data] call fn_saveAccount;
 		};
 
@@ -52,17 +53,13 @@ A3W_fnc_checkPlayerFlag =
 {
 	(_this select 1) spawn
 	{
-		_UID = _this select 1;
-		_data = _UID call fn_loadAccount;
+		params ["_player", "_UID"];
+		_data = [_UID, _player] call fn_loadAccount;
 
 		[[_this, _data],
 		{
-			_pVal = _this select 0;
-			_data = _this select 1;
-
-			_player = _pVal select 0;
-			_UID = _pVal select 1;
-			_pNetId = _pVal select 2;
+			params ["_pVal", "_data"];
+			_pVal params ["_player", "_UID", "_pNetId"];
 
 			_pvarName = "pvar_applyPlayerData_" + _UID;
 
@@ -70,10 +67,12 @@ A3W_fnc_checkPlayerFlag =
 			(owner _player) publicVariableClient _pvarName;
 
 			{
-				switch (_x select 0) do {
-					case "BankMoney": { _player setVariable ["bmoney", _x select 1, true] };
-					case "Bounty": 	{ _player setVariable ["bounty", _x select 1, true] };
-					case "BountyKills":	{ _player setVariable ["bountyKills", _x select 1, true] };
+				_x params ["_var", "_val"];
+				switch (_var) do
+				{
+					case "BankMoney":    { _player setVariable ["bmoney", _val, true] };
+					case "Bounty":       { _player setVariable ["bounty", _val, true] };
+					case "BountyKills":  { _player setVariable ["bountyKills", _val, true] };
 				};
 			} forEach _data;
 
