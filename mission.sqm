@@ -8,11 +8,11 @@ class EditorData
 	toggles=6;
 	class ItemIDProvider
 	{
-		nextID=893;
+		nextID=895;
 	};
 	class LayerIndexProvider
 	{
-		nextID=3;
+		nextID=7;
 	};
 	class Camera
 	{
@@ -124,7 +124,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=713;
+		items=715;
 		class Item0
 		{
 			dataType="Group";
@@ -3084,7 +3084,7 @@ class Mission
 						angles[]={0,3.5270867,0};
 					};
 					side="Civilian";
-					flags=3;
+					flags=7;
 					class Attributes
 					{
 						init="0 = [this] spawn A3W_fnc_setupStoreNPC";
@@ -3092,14 +3092,14 @@ class Mission
 					};
 					id=190;
 					type="C_man_1_1_F";
-					atlOffset=0.51211119;
+					atlOffset=0.00027656555;
 				};
 			};
 			class Attributes
 			{
 			};
 			id=189;
-			atlOffset=0.51211119;
+			atlOffset=0.00027656555;
 		};
 		class Item45
 		{
@@ -3158,14 +3158,14 @@ class Mission
 					};
 					id=194;
 					type="C_man_1_1_F";
-					atlOffset=0.15421128;
+					atlOffset=0.00020599365;
 				};
 			};
 			class Attributes
 			{
 			};
 			id=193;
-			atlOffset=0.15421128;
+			atlOffset=0.00020599365;
 		};
 		class Item47
 		{
@@ -3191,14 +3191,14 @@ class Mission
 					};
 					id=196;
 					type="C_man_1_1_F";
-					atlOffset=0.20374012;
+					atlOffset=8.2015991e-005;
 				};
 			};
 			class Attributes
 			{
 			};
 			id=195;
-			atlOffset=0.20374012;
+			atlOffset=8.2015991e-005;
 		};
 		class Item48
 		{
@@ -12685,7 +12685,7 @@ class Mission
 			name="LandConvoy_2_1";
 			type="Empty";
 			colorName="ColorEAST";
-			angle=224.24185;
+			angle=224.24181;
 			id=842;
 			atlOffset=-243.90906;
 		};
@@ -12707,7 +12707,7 @@ class Mission
 			name="LandConvoy_2_3";
 			type="Empty";
 			colorName="ColorEAST";
-			angle=216.73567;
+			angle=216.73563;
 			id=844;
 			atlOffset=-0.00016784668;
 		};
@@ -12784,7 +12784,7 @@ class Mission
 			name="Roadblock_4";
 			type="Empty";
 			colorName="ColorUNKNOWN";
-			angle=56.650002;
+			angle=56.64999;
 			id=851;
 			atlOffset=264.00009;
 		};
@@ -12817,7 +12817,7 @@ class Mission
 			name="Roadblock_7";
 			type="Empty";
 			colorName="ColorUNKNOWN";
-			angle=104.90041;
+			angle=104.90039;
 			id=854;
 			atlOffset=256.98993;
 		};
@@ -13110,7 +13110,7 @@ class Mission
 					name="Parking5_spawn";
 					type="Empty";
 					colorName="ColorBlack";
-					angle=1.7231833;
+					angle=1.7231829;
 					id=882;
 					atlOffset=-0.00017547607;
 				};
@@ -13212,7 +13212,7 @@ class Mission
 					name="Parking9_spawn";
 					type="Empty";
 					colorName="ColorBlack";
-					angle=110.20683;
+					angle=110.20681;
 					id=891;
 					atlOffset=-4.2262793;
 				};
@@ -13226,6 +13226,32 @@ class Mission
 			name="CustomLayer";
 			id=892;
 			atlOffset=60.779999;
+		};
+		class Item713
+		{
+			dataType="Marker";
+			position[]={7525.022,3.1232569,7972.7188};
+			name="center_mrk";
+			type="Empty";
+			colorName="ColorBlack";
+			id=893;
+		};
+		class Item714
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={8500.5,170.00133,12483.5};
+				angles[]={0,1.3446136,0};
+			};
+			side="Empty";
+			flags=5;
+			class Attributes
+			{
+				init="[this] call A3W_fnc_setupMissionATM";
+			};
+			id=894;
+			type="Land_Atm_01_F";
 		};
 	};
 };
