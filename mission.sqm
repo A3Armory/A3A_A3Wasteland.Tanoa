@@ -8,11 +8,11 @@ class EditorData
 	toggles=6;
 	class ItemIDProvider
 	{
-		nextID=895;
+		nextID=896;
 	};
 	class LayerIndexProvider
 	{
-		nextID=7;
+		nextID=11;
 	};
 	class Camera
 	{
@@ -38,7 +38,8 @@ addons[]=
 	"A3_Structures_F_Exp_Naval_Piers",
 	"A3_Structures_F_Civ_Lamps",
 	"A3_Structures_F_Naval_Buoys",
-	"A3_Structures_F_Exp_Industrial_SurfaceMine_01"
+	"A3_Structures_F_Exp_Industrial_SurfaceMine_01",
+	"A3_Structures_F_Furniture"
 };
 class AddonsMetaData
 {
@@ -124,7 +125,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=715;
+		items=716;
 		class Item0
 		{
 			dataType="Group";
@@ -4437,7 +4438,7 @@ class Mission
 			type="Empty";
 			colorName="ColorWhite";
 			id=305;
-			atlOffset=23.83436;
+			atlOffset=22.424208;
 		};
 		class Item146
 		{
@@ -12685,7 +12686,7 @@ class Mission
 			name="LandConvoy_2_1";
 			type="Empty";
 			colorName="ColorEAST";
-			angle=224.24181;
+			angle=224.24178;
 			id=842;
 			atlOffset=-243.90906;
 		};
@@ -12784,7 +12785,7 @@ class Mission
 			name="Roadblock_4";
 			type="Empty";
 			colorName="ColorUNKNOWN";
-			angle=56.64999;
+			angle=56.649982;
 			id=851;
 			atlOffset=264.00009;
 		};
@@ -12817,7 +12818,7 @@ class Mission
 			name="Roadblock_7";
 			type="Empty";
 			colorName="ColorUNKNOWN";
-			angle=104.90039;
+			angle=104.90038;
 			id=854;
 			atlOffset=256.98993;
 		};
@@ -13110,7 +13111,7 @@ class Mission
 					name="Parking5_spawn";
 					type="Empty";
 					colorName="ColorBlack";
-					angle=1.7231829;
+					angle=1.7231827;
 					id=882;
 					atlOffset=-0.00017547607;
 				};
@@ -13212,7 +13213,7 @@ class Mission
 					name="Parking9_spawn";
 					type="Empty";
 					colorName="ColorBlack";
-					angle=110.20681;
+					angle=110.20679;
 					id=891;
 					atlOffset=-4.2262793;
 				};
@@ -13241,7 +13242,7 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={8500.5,170.00133,12483.5};
+				position[]={8501.5,169.99577,12481};
 				angles[]={0,1.3446136,0};
 			};
 			side="Empty";
@@ -13252,6 +13253,22 @@ class Mission
 			};
 			id=894;
 			type="Land_Atm_01_F";
+		};
+		class Item715
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={8500.5068,168.71452,12483.949};
+				angles[]={0,1.0510635,0};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+			};
+			id=895;
+			type="Land_ChairWood_F";
 		};
 	};
 };
