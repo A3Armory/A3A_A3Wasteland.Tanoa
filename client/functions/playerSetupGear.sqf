@@ -22,7 +22,7 @@ if (_goggles != "") then { _player addGoggles _goggles };
 sleep 0.1;
 
 // Remove GPS
-_player unlinkItem "ItemGPS";
+//_player unlinkItem "ItemGPS";
 
 // Remove radio
 //_player unlinkItem "ItemRadio";
@@ -35,8 +35,6 @@ _player linkItem "NVGoggles";
 
 _player addBackpack "B_AssaultPack_rgr";
 
-_player addItem "FirstAidKit";
-
 switch (true) do
 {
 	case (["_medic_", typeOf _player] call fn_findString != -1):
@@ -48,6 +46,8 @@ switch (true) do
 		_player addWeapon "hgun_Pistol_heavy_01_F";
 		_player addMagazine "30Rnd_9x21_Mag";
 		_player addItem "Medikit";
+		_player addItem "FirstAidKit";
+		_player addItem "FirstAidKit";
 	};
 	case (["_engineer_", typeOf _player] call fn_findString != -1):
 	{
@@ -70,7 +70,7 @@ switch (true) do
 		_player addMagazine "9Rnd_45ACP_Mag";
 		_player addWeapon "hgun_ACPC2_F";
 		_player addWeaponItem ["hgun_ACPC2_F", "muzzle_snds_acp"];
-		_player addItem "HandGrenade";
+		_player addItem "MiniGrenade";
 	};
 	case (["_diver_", typeOf _player] call fn_findString != -1):
 	{
@@ -80,7 +80,6 @@ switch (true) do
 		_player addMagazine "11Rnd_45ACP_Mag";
 		_player addWeapon "hgun_Pistol_heavy_01_F";
 		_player addWeaponItem ["hgun_Pistol_heavy_01_F", "muzzle_snds_acp"];
-		_player addMagazine "20Rnd_556x45_UW_mag";
 		_player addItem "MiniGrenade";
 	};
 };
