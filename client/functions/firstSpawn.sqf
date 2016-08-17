@@ -90,11 +90,6 @@ player addEventHandler ["WeaponAssembled",
 			_obj setAutonomous false; // disable autonomous mode by default on static designators so they stay on target after releasing controls
 		};
 
-		if (_obj isKindOf "UAV_01_base_F") then
-		{
-			_obj disableTIEquipment true; // disable thermal
-		};
-
 		{
 			[_x, ["UAV","",""]] remoteExec ["A3W_fnc_setName", 0, _x]; 
 		} forEach crew _obj;
@@ -224,7 +219,7 @@ _uid = getPlayerUID player;
 if (playerSide in [BLUFOR,OPFOR,INDEPENDENT] && {{_x select 0 == _uid} count pvar_teamSwitchList == 0}) then
 {
 	_startTime = diag_tickTime;
-	waitUntil {sleep 1; diag_tickTime - _startTime >= 180};
+	waitUntil {sleep 1; diag_tickTime - _startTime >= 600};
 
 	pvar_teamSwitchLock = [_uid, playerSide];
 	publicVariableServer "pvar_teamSwitchLock";

@@ -86,15 +86,15 @@ switch (_boxType) do
 		_boxItems =
 		[
 			// Item type, Item class(es), # of items, # of magazines per weapon
-			["wep", ["srifle_LRR_camo_F", "srifle_LRR_tna_F", "srifle_GM6_camo_F", "srifle_GM6_ghex_F"], RANDOM_BETWEEN(1,3), RANDOM_BETWEEN(4,6)],
-			["wep", ["srifle_EBR_F", "srifle_DMR_01_F"], RANDOM_BETWEEN(1,3), RANDOM_BETWEEN(4,6)],
+			["wep", ["srifle_LRR_camo_F", "srifle_LRR_tna_F", "srifle_EBR_F", "srifle_DMR_01_F"], RANDOM_BETWEEN(1,3), RANDOM_BETWEEN(3,6)],
+			["wep", ["srifle_GM6_F", "srifle_GM6_camo_F", "srifle_GM6_ghex_F"], RANDOM_BETWEEN(2,3), RANDOM_BETWEEN(4,6)],
 			["wep", ["Laserdesignator", "Laserdesignator_03"], RANDOM_BETWEEN(1,2)],
 			["wep", "Laserdesignator_02", RANDOM_BETWEEN(0,1)],
-			["mag", "5Rnd_127x108_APDS_Mag", RANDOM_BETWEEN(2,4)],
+			["itm", ["optic_LRPS", "optic_LRPS_ghex_F", "optic_LRPS_tna_F"], RANDOM_BETWEEN(1,2)],
 			["itm", "optic_Nightstalker", RANDOM_BETWEEN(0,1)],
 			["itm", "optic_tws", RANDOM_BETWEEN(0,1)],
-			["itm", "optic_LRPS", RANDOM_BETWEEN(1,2)],
-			["mag", "HandGrenade", RANDOM_BETWEEN(0,5)]
+			["mag", "HandGrenade", RANDOM_BETWEEN(0,5)],
+			["mag", "5Rnd_127x108_APDS_Mag", RANDOM_BETWEEN(2,4)]
 		];
 	};
 	case "mission_Uniform":
@@ -102,11 +102,13 @@ switch (_boxType) do
 		_boxItems =
 		[
 			// Item type, Item class(es), # of items, # of magazines per weapon
-			["itm", ["V_RebreatherIA", "V_RebreatherIR", "V_RebreatherB"], RANDOM_BETWEEN(1,4)],
-			["itm", ["B_Carryall_mcamo", "B_Kitbag_mcamo"], RANDOM_BETWEEN(1,5)],
-			["itm", ["H_HelmetSpecB_paint2","H_HelmetO_oucamo","H_HelmetLeaderO_oucamo","H_HelmetSpecO_blk"], RANDOM_BETWEEN(1,5)],
-			["itm", "Medikit", RANDOM_BETWEEN(1,3)],
-			["itm", "Toolkit", RANDOM_BETWEEN(1,2)]
+			["itm", ["V_RebreatherIA", "V_RebreatherIR", "V_RebreatherB"], RANDOM_BETWEEN(1,3)],
+			["itm", ["B_Carryall_mcamo", "B_Kitbag_mcamo"], RANDOM_BETWEEN(1,3)],
+			["itm", ["H_HelmetSpecB_paint2","H_HelmetO_oucamo","H_HelmetLeaderO_oucamo","H_HelmetSpecO_blk"], RANDOM_BETWEEN(1,3)],
+			["itm", "Medikit", RANDOM_BETWEEN(1,2)],
+			["itm", "Toolkit", RANDOM_BETWEEN(1,2)],
+			["itm", ["B_UavTerminal", "O_UavTerminal", "I_UavTerminal"], RANDOM_BETWEEN(1,3)],
+			["itm", ["B_UAV_01_backpack_F", "O_UAV_01_backpack_F", "I_UAV_01_backpack_F"], RANDOM_BETWEEN(1,2)]
 		];
 	};
 	case "mission_DLCRifles":

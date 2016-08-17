@@ -222,6 +222,7 @@ throwputArray = compileFinal str
 //Text name, classname, buy cost
 ammoArray = compileFinal str
 [
+	["9mm 10Rnd Mag", "10Rnd_9x21_Mag", 8],
 	["9mm 16Rnd Mag", "16Rnd_9x21_Mag", 10],
 	["9mm 30Rnd Mag", "30Rnd_9x21_Mag", 15],
 	["9mm 30Rnd SMG Mag", "30Rnd_9x21_Mag_SMG_02", 15],
@@ -696,12 +697,12 @@ backpackArray = compileFinal str
 
 genItemArray = compileFinal str
 [
-	["UAV Terminal (NATO)", "B_UavTerminal", 150, "gps"],
-	["UAV Terminal (CSAT)", "O_UavTerminal", 150, "gps"],
-	["UAV Terminal (AAF)", "I_UavTerminal", 150, "gps"],
-	["Quadrotor UAV (NATO)", "B_UAV_01_backpack_F", 1000, "backpack"],
-	["Quadrotor UAV (CSAT)", "O_UAV_01_backpack_F", 1000, "backpack"],
-	["Quadrotor UAV (AAF)", "I_UAV_01_backpack_F", 1000, "backpack"],
+	["UAV Terminal (NATO)", "B_UavTerminal", 500, "gps"],
+	["UAV Terminal (CSAT)", "O_UavTerminal", 500, "gps"],
+	["UAV Terminal (AAF)", "I_UavTerminal", 500, "gps"],
+	["Quadrotor UAV (NATO)", "B_UAV_01_backpack_F", 8000, "backpack"],
+	["Quadrotor UAV (CSAT)", "O_UAV_01_backpack_F", 8000, "backpack"],
+	["Quadrotor UAV (AAF)", "I_UAV_01_backpack_F", 8000, "backpack"],
 	["Remote Designator (Sand)", "B_Static_Designator_01_weapon_F", 750, "backpack"],
 	["Remote Designator (Hex)", "O_Static_Designator_02_weapon_F", 750, "backpack"],
 	["GPS", "ItemGPS", 100, "gps"],
@@ -1324,8 +1325,6 @@ donatorItems = compileFinal str
 "srifle_DMR_05_hex_F",
 "srifle_LRR_camo_F",
 "srifle_LRR_tna_F",
-"srifle_GM6_camo_F",
-"srifle_GM6_ghex_F",
 "srifle_DMR_04_tan_F",
 "arifle_MX_SW_Black_F",
 "arifle_MX_SW_khk_F",
@@ -1565,6 +1564,9 @@ donatorItems = compileFinal str
 //Put all gun, ammo, or general item classes in this list if you only want them only accessible through missions (this list will not add these items to mission crates, do that manually)
 missionOnlyItems = compileFinal str
 [
+"srifle_GM6_F",
+"srifle_GM6_camo_F",
+"srifle_GM6_ghex_F",
 "MMG_02_sand_F",
 "MMG_02_camo_F",
 "MMG_02_black_F",
@@ -1577,7 +1579,10 @@ missionOnlyItems = compileFinal str
 "Laserdesignator_03",
 "optic_tws",
 "optic_tws_mg",
-"optic_Nightstalker"
+"optic_Nightstalker",
+"B_UAV_01_backpack_F",
+"O_UAV_01_backpack_F",
+"I_UAV_01_backpack_F"
 ];
 
 call compile preprocessFileLineNumbers "mapConfig\storeOwners.sqf";
