@@ -30,8 +30,8 @@ A3W_bleedingTime = 60;             // Time in seconds for which to allow revive 
 A3W_headshotNoRevive = 1;          // Instant death on fatal headshot by enemy player with non-explosive ammo (0 = no, 1 = yes)
 A3W_customDeathMessages = 1;       // If difficulty option deathMessages=0, display custom messages related to causes of death, as defined in fn_deathMessage.sqf (0 = no, 1 = yes)
 A3W_healthTime = 7*60;             // Seconds till death once starving or dehydrated
-A3W_hungerTime = 160*60;           // Seconds till starving
-A3W_thirstTime = 120*60;           // Seconds till dehydrated
+A3W_hungerTime = 170*60;           // Seconds till starving
+A3W_thirstTime = 140*60;           // Seconds till dehydrated
 
 // Spawn settings
 A3W_townSpawnCooldown = 15*60;      // Number of seconds to wait between each spawn on a specific town (0 = disabled)
@@ -165,6 +165,7 @@ A3W_missionFarAiDrawLines = 1;     // Draw small red lines on the map from missi
 A3W_missionsQuantity = 4;          // Number of missions running at the same time (0 to 6)
 A3W_heliPatrolMissions = 1;        // Enable missions involving flying helicopters piloted by AI (0 = no, 1 = yes)
 A3W_underWaterMissions = 1;        // Enable underwater missions which require diving gear (0 = no, 1 = yes)
+A3W_waterMissionLimit = 1;         // Limit the number of concurrent water missions
 A3W_mainMissionDelay = 5*60;       // Time in seconds between Main Missions
 A3W_mainMissionTimeout = 60*60;    // Time in seconds that a Main Mission will run for, unless completed
 A3W_sideMissionDelay = 5*60;       // Time in seconds between Side Missions
