@@ -28,10 +28,10 @@ if (getNumber (configFile >> "CfgVehicles" >> _class >> "isUav") < 1) then
 	_vehicle disableTIEquipment true;
 };
 
-if (_vehicle isKindOf "UAV_01_base_F") then
+/*if (_vehicle isKindOf "UAV_01_base_F") then
 {
 	_vehicle disableTIEquipment true; // disable thermal
-};
+};*/
 
 _vehicle setUnloadInCombat [false, false]; // Try to prevent AI from getting out of vehicles while in combat (not sure if this actually works...)
 
@@ -110,7 +110,7 @@ switch (true) do
 	{
 		_vehicle animate ["HideServices", 0];
 	};
-	case ({_class isKindOf _x} count ["B_Heli_Light_01_F", "B_Heli_Light_01_armed_F"] > 0):
+	/*case ({_class isKindOf _x} count ["B_Heli_Light_01_F", "B_Heli_Light_01_armed_F"] > 0):
 	{
 		// Add flares to poor MH-9's
 		_vehicle addWeaponTurret ["CMFlareLauncher", [-1]];
@@ -126,7 +126,7 @@ switch (true) do
 		{
 			_vehicle addMagazineTurret ["300Rnd_20mm_shells", [-1]];
 		};
-	};
+	};*/
 };
 
 _weapons = getArray (configFile >> "CfgVehicles" >> _class >> "weapons");

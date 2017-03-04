@@ -9,12 +9,12 @@
 if (!isServer) exitwith {};
 #include "sideMissionDefines.sqf"
 
-private ["_nbUnits", "_wreckPos", "_wreck", "_box1", "_box2", "_randomBox", "_randomBox2"];
+private ["_nbUnits", "_wreckPos", "_wreck", "_box", "_randomBox", "_randomCase"];
 
 _setupVars =
 {
 	_missionType = "Aircraft Wreck";
-	_locationsArray = [ForestMissionMarkers, MissionSpawnMarkers] select (ForestMissionMarkers isEqualTo []);
+	_locationsArray = MissionSpawnMarkers;
 	_nbUnits = if (missionDifficultyHard) then { AI_GROUP_LARGE } else { AI_GROUP_MEDIUM };
 };
 
@@ -26,23 +26,19 @@ _setupObjects =
 	// Class, Position, Fuel, Ammo, Damage, Special
 	_wreck = ["O_Heli_Light_02_unarmed_F", _wreckPos, 0, 0, 1] call createMissionVehicle;
 
-	_randomBox = selectRandom ["mission_USLaunchers","mission_Main_A3snipers","mission_Uniform","mission_DLCLMGs","mission_ApexRifles"];
-	_randomBox2 = selectRandom ["mission_USSpecial","mission_HVSniper","mission_DLCRifles","mission_HVLaunchers"];
-	_box1 = createVehicle ["Box_NATO_WpsSpecial_F", _missionPos, [], 5, "None"];
-	_box1 setDir random 360;
-	[_box1, _randomBox] call fn_refillbox;
+	_randomBox = selectRandom ["mission_USLaunchers","mission_Main_A3snipers","mission_Uniform","mission_DLCLMGs","mission_ApexRifles","mission_USSpecial","mission_HVSniper","mission_DLCRifles","mission_HVLaunchers"];
+	_randomCase = selectRandom ["Box_NATO_WpsSpecial_F","Box_East_WpsSpecial_F","Box_NATO_Wps_F","Box_East_Wps_F"];
+	_box = createVehicle [_randomCase, _missionPos, [], 5, "None"];
+	_box setDir random 360;
+	[_box, _randomBox] call fn_refillbox;
 
-	_box2 = createVehicle ["Box_East_WpsSpecial_F", _missionPos, [], 5, "None"];
-	_box2 setDir random 360;
-	[_box2, _randomBox2] call fn_refillbox;
-
-	{ _x setVariable ["R3F_LOG_disabled", true, true] } forEach [_box1, _box2];
+	{ _x setVariable ["R3F_LOG_disabled", true, true] } forEach [_box];
 
 	_aiGroup = createGroup CIVILIAN;
 	[_aiGroup, _missionPos, _nbUnits] call createCustomGroup;
 
 	_missionPicture = getText (configFile >> "CfgVehicles" >> typeOf _wreck >> "picture");
-	_missionHintText = "A helicopter has come down under enemy fire!";
+	_missionHintText = "A helicopter has come down under enemy fire! Secure the crash site.";
 };
 
 _waitUntilMarkerPos = nil;
@@ -52,16 +48,16 @@ _waitUntilCondition = nil;
 _failedExec =
 {
 	// Mission failed
-	{ deleteVehicle _x } forEach [_box1, _box2, _wreck];
+	{ deleteVehicle _x } forEach [_box, _wreck];
 };
 
 _successExec =
 {
 	// Mission completed
-	{ _x setVariable ["R3F_LOG_disabled", false, true] } forEach [_box1, _box2];
+	{ _x setVariable ["R3F_LOG_disabled", false, true] } forEach [_box];
 	deleteVehicle _wreck;
 
-	_successHintMessage = "The airwreck supplies have been collected. Well done.";
+	_successHintMessage = "The crash site has been secured. Well done.";
 };
 
 _this call sideMissionProcessor;

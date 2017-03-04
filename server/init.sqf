@@ -33,6 +33,8 @@ if (isServer) then
 
 		_veh = objectParent _unit;
 
+		(format ["Player %1 went to lobby", _name]) remoteExecCall ["systemChat", 0];
+
 		// force unlock vehicle if not owned by player OR if somebody else is still inside
 		if (alive _veh && (_veh getVariable ["ownerUID","0"] != _uid || {{alive _x} count (crew _veh - [_unit]) > 0})) then
 		{
@@ -166,7 +168,7 @@ if (isServer) then
 		"A3W_vehicleLocking",
 		"A3W_disableBuiltInThermal",
 		"A3W_customDeathMessages",
-		"A3W_headshotNoRevive",
+		//"A3W_headshotNoRevive",
 		"A3W_maxSpawnBeacons",
 		"A3W_bountyMax",
 		"A3W_bountyMinStart",
@@ -175,7 +177,12 @@ if (isServer) then
 		"A3W_maxMoney",
 		"A3W_healthTime",
 		"A3W_hungerTime",
-		"A3W_thirstTime"
+		"A3W_thirstTime",
+		"A3W_fastMovementLog",
+		"A3W_fastMovementLogDist",
+		"A3W_fastMovementLoopTime",
+		"A3W_reservedSlots",
+		"A3W_maxPlayers"
 	];
 
 	addMissionEventHandler ["PlayerConnected", fn_onPlayerConnected];
