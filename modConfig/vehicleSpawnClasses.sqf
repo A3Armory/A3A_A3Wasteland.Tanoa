@@ -13,9 +13,9 @@ A3W_smallVehicles =
 //Civilian Vehicle List - Random Spawns
 civilianVehicles =
 [
-	"C_Hatchback_01_F",
+	"C_Offroad_02_unarmed_F",
 	"C_Hatchback_01_sport_F",
-	"C_SUV_01_F",
+	"I_C_Offroad_02_unarmed_F",
 	"C_Offroad_01_F",
 	["C_Van_01_box_F", "C_Van_01_transport_F"]
 ];
@@ -23,7 +23,7 @@ civilianVehicles =
 //Light Military Vehicle List - Random Spawns
 lightMilitaryVehicles =
 [
-	["I_G_Offroad_01_F", "I_G_Offroad_01_armed_F"]
+	["B_CTRG_LSV_01_light_F", "I_G_Offroad_01_armed_F"]
 ];
 
 //Medium Military Vehicle List - Random Spawns
@@ -31,6 +31,7 @@ mediumMilitaryVehicles =
 [
 	"B_MRAP_01_F",
 	"O_MRAP_02_F",
+	"O_T_LSV_02_unarmed_F",
 	"I_MRAP_03_F"
 ];
 
@@ -38,8 +39,8 @@ mediumMilitaryVehicles =
 waterVehicles =
 [
 	"C_Boat_Civil_01_F",
-	"C_Boat_Civil_01_F",
-	["C_Boat_Civil_01_police_F", "C_Boat_Civil_01_rescue_F"],
+	"C_Boat_Civil_01_police_F",
+	["C_Scooter_Transport_01_F", "C_Boat_Civil_01_rescue_F"],
 	["B_Boat_Armed_01_minigun_F", "O_Boat_Armed_01_hmg_F", "I_Boat_Armed_01_minigun_F"]
 ];
 
