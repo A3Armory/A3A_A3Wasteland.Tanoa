@@ -10,6 +10,7 @@
 
 #define ANIM "AinvPknlMstpSlayWrflDnon_medic"
 #define ERR_CANCELLED "Action Cancelled"
+#define ERR_IN_BUILDING "Action Failed! You cannot place a beacon in a building"
 #define ERR_IN_VEHICLE "Action Failed! You can't do this in a vehicle"
 #define MAX_BEACONS format ["You cannot deploy more then %1 spawnbeacons", [_MaxSpawnbeacons]]
 _MaxSpawnbeacons = ceil (["A3W_maxSpawnBeacons", 5] call getPublicVar);
@@ -26,16 +27,17 @@ _beacons = [];
 
 _ownedBeacons = count _beacons;
 
-
 _hasFailed = {
-	private ["_progress", "_failed", "_text"];
+	private ["_progress", "_failed", "_text", "_lisCheck"];
 	_progress = _this select 0;
 	_failed = true;
+	_lisCheck = lineIntersectsSurfaces [getPosWorld player, getPosWorld player vectorAdd [0, 0, 50], player, objNull, true, 1, "GEOM", "NONE"];
 	switch (true) do {
 		case (!alive player): {};
 		case (doCancelAction) :{doCancelAction = false; _text = ERR_CANCELLED;};
 		case (vehicle player != player): {_text = ERR_IN_VEHICLE};
 		case (_ownedBeacons >= _MaxSpawnbeacons): {_text = MAX_BEACONS; player spawn deleteBeacon};
+		case (!(_lisCheck isEqualTo []) && {(_lisCheck select 0 select 3) isKindOf "House"}): {_text = ERR_IN_BUILDING};
 		default {
 			_text = format["Spawn Beacon %1%2 Deployed", round(_progress*100), "%"];
 			_failed = false;
@@ -52,12 +54,13 @@ if (_success) then {
 	_beacon setDir (getDir player + 270);
 	//_beacon setVariable ["allowDamage", true, true];
 	_beacon setVariable ["a3w_spawnBeacon", true, true];
+	_beacon setVariable ["persistent", true, true];
 	_beacon setVariable ["R3F_LOG_disabled", true];
 	_beacon setVariable ["side", playerSide, true];
 	_beacon setVariable ["ownerName", name player, true];
 	_beacon setVariable ["ownerUID", _uid, true];
 	_beacon setVariable ["packing", false, true];
-	_beacon setVariable ["groupOnly", true, true];
+	_beacon setVariable ["groupOnly", (playerSide == INDEPENDENT), true];
 	/*{
 		if (_x getVariable ["ownerUID",""] == _uid) then {
 			pvar_spawn_beacons = pvar_spawn_beacons - [_x];
@@ -68,7 +71,6 @@ if (_success) then {
 	publicVariable "pvar_spawn_beacons";
 	pvar_manualObjectSave = netId _beacon;
 	publicVariableServer "pvar_manualObjectSave";
-	["You placed the Spawn Beacon successfully!", 5] call mf_notify_client;
+	["You placed a Spawn Beacon successfully!", 5] call mf_notify_client;
 };
 _success;
-

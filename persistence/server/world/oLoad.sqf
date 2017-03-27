@@ -106,6 +106,7 @@ _exclObjectIDs = [];
 					};
 				};
 				case "side": { _value = _value call _strToSide };
+				case "cmoney": { if (_value isEqualType "") then { _value = parseNumber _value } };
 				case "R3F_Side": { _value = _value call _strToSide };
 				case "ownerName":
 				{
@@ -138,7 +139,6 @@ _exclObjectIDs = [];
 			case (_obj call _isBeacon):
 			{
 				pvar_spawn_beacons pushBack _obj;
-				_obj setVariable ["groupOnly", true, true];
 				publicVariable "pvar_spawn_beacons";
 				true
 			};

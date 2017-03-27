@@ -23,7 +23,7 @@ _nightTime = (date select 3 >= 18 || date select 3 < 5); // spawn night items be
 	if (random 1 < 0.15) then { _car addItemCargoGlobal ["NVGoggles", 1]};
 };*/
 
-if (random 1 < 0.45) then { _car addWeaponCargoGlobal ["Rangefinder", 1]};
+//if (random 1 < 0.45) then { _car addWeaponCargoGlobal ["Rangefinder", 1]};
 
 //Get Random Gun From randomWeapons Array.
 _weapon = vehicleWeapons call fn_selectRandomNested;
@@ -46,29 +46,37 @@ switch (["A3W_vehicleLoot", 1] call getPublicVar) do
 	{
 		_random = random 1;
 
-		// If building loot is turned off, give everything, otherwise 50/50 chance between gun or items
-		if (_random < 0.5 || !_buildingLootOn) then
+		if (_random < 0.5) then
 		{
 			_car addWeaponCargoGlobal [_weapon, 1];
 			_car addMagazineCargoGlobal [_mag, 2 + floor random 3];
 		};
-		if (_random >= 0.5 || !_buildingLootOn) then
+		if (_random >= 0.5) then
 		{
 			_car addItemCargoGlobal [_additionTwo, 1];
-			if (_nightTime) then { _car addMagazineCargoGlobal [_additionThree, 1] };
+			_car addMagazineCargoGlobal [_additionThree, 1];
 		};
 
 		_car addItemCargoGlobal [_additionOne, 1];
 	};
 	case 2:
 	{
+		_random = random 1;
+
+		if (_random < 0.5) then
+		{
+			_car addItemCargoGlobal [_additionOne, 1];
+			_car addItemCargoGlobal [_additionTwo, 1];
+		};
+		if (_random >= 0.5) then
+		{
+			_car addItemCargoGlobal ["FirstAidKit", 1];
+			_car addItemCargoGlobal [_additionOne, 1];
+			_car addMagazineCargoGlobal [_additionThree, 1];
+		};
+
 		_car addWeaponCargoGlobal [_weapon, 1];
 		_car addMagazineCargoGlobal [_mag, 2 + floor random 3];
-
-		_car addItemCargoGlobal ["FirstAidKit", 1];
-		_car addItemCargoGlobal [_additionOne, 1];
-		_car addItemCargoGlobal [_additionTwo, 1];
-		if (_nightTime) then { _car addMagazineCargoGlobal [_additionThree, 1] };
 	};
 	case 3:
 	{
@@ -84,6 +92,6 @@ switch (["A3W_vehicleLoot", 1] call getPublicVar) do
 		_car addItemCargoGlobal ["FirstAidKit", 2];
 		_car addItemCargoGlobal [_additionOne, 2];
 		_car addItemCargoGlobal [_additionTwo, 2];
-		if (_nightTime) then { _car addMagazineCargoGlobal [_additionThree, 1] };
+		_car addMagazineCargoGlobal [_additionThree, 1];
 	};
 };
