@@ -62,7 +62,7 @@ switch (_boxType) do
 			["wep", ["LMG_Mk200_F", "LMG_Zafir_F"], RANDOM_BETWEEN(1,3), RANDOM_BETWEEN(2,4)],
 			["mag", "30Rnd_556x45_Stanag", RANDOM_BETWEEN(4,8)],
 			["mag", "30Rnd_65x39_caseless_green", RANDOM_BETWEEN(4,8)],
-			["mag", "30Rnd_9x21_Mag", RANDOM_BETWEEN(1,5)]
+			["mag", "30Rnd_45ACP_MAG_SMG_01", RANDOM_BETWEEN(1,5)]
 		];
 	};
 	case "mission_Main_A3snipers":
@@ -167,13 +167,17 @@ switch (_boxType) do
 		_boxItems =
 		[
 			// Item type, Item class(es), # of items, # of magazines per weapon
-			["mag", "11Rnd_45ACP_Mag", 4],
+			["mag", "20Rnd_556x45_UW_mag", 4],
+			["mag", "30Rnd_45ACP_MAG_SMG_01", 4],
 			["mag", "30Rnd_556x45_Stanag_Tracer_Yellow", 4],
 			["mag", "10Rnd_762x54_Mag", 4],
 			["mag", "9Rnd_45ACP_Mag", 4],
-			["mag", "20Rnd_556x45_UW_mag", 4],
+			["mag", "11Rnd_45ACP_Mag", 4],
+			["itm", "HandGrenade", 5],
 			["itm", "FirstAidKit", 5],
-			["itm", "HandGrenade", 5]
+			["itm", "Medikit", 1],
+			["itm", "Toolkit", 1],
+			["itm", "MineDetector", 1]
 		];
 	};
 };
