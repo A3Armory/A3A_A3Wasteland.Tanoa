@@ -13,7 +13,15 @@ private _isUAV = (round getNumber (configFile >> "CfgVehicles" >> _class >> "isU
 private ([["_flying"],[]] select isNil "_flying");
 _flying = (!isNil "_flying" && {_flying > 0});
 
-_veh = createVehicle [_class, _pos, [], if (isNil "_safeDistance") then { 0 } else { _safeDistance }, ["","FLY"] select (_isUAV && _flying)];
+private _special = ["","FLY"] select (_isUAV && _flying);
+private _tempPos = +_pos;
+
+if (isNil "_safeDistance" && _special == "") then
+{
+	_tempPos set [2, 9000000 + random 999999];
+};
+
+_veh = createVehicle [_class, _tempPos, [], if (isNil "_safeDistance") then { 0 } else { _safeDistance }, _special];
 _veh allowDamage false;
 _veh hideObjectGlobal true;
 
@@ -21,6 +29,12 @@ private _velMag = vectorMagnitude velocity _veh;
 
 if (isNil "_safeDistance") then
 {
+	if (!isNil "_dir") then
+	{
+		_veh setVelocity [0,0,0];
+		_veh setVectorDirAndUp _dir;
+	};
+
 	_veh setPosWorld ATLtoASL _pos;
 };
 
@@ -109,24 +123,31 @@ if (!isNil "_textures") then
 {
 	_veh setVariable ["BIS_enableRandomization", false, true];
 
-	private _objTextures = [];
-
+	if (_textures isEqualTypeAll "") then // TextureSource
 	{
-		_texture = _x select 0;
-
-		// fix for double backslashes in parking data
-		if (_texture find "\\" != -1) then
-		{
-			_texture = (["","\"] select (_texture select [0,1] == "\")) + (_texture splitString "\" joinString "\");
-		};
+		[_veh, _textures] call applyVehicleTexture;
+	}
+	else // texture paths
+	{
+		private _objTextures = [];
 
 		{
-			_veh setObjectTextureGlobal [_x, _texture];
-			[_objTextures, _x, _texture] call fn_setToPairs;
-		} forEach (_x select 1);
-	} forEach _textures;
+			_texture = _x select 0;
 
-	_veh setVariable ["A3W_objectTextures", _objTextures, true];
+			// fix for double backslashes in parking data
+			if (_texture find "\\" != -1) then
+			{
+				_texture = (["","\"] select (_texture select [0,1] == "\")) + (_texture splitString "\" joinString "\");
+			};
+
+			{
+				_veh setObjectTextureGlobal [_x, _texture];
+				[_objTextures, _x, _texture] call fn_setToPairs;
+			} forEach (_x select 1);
+		} forEach _textures;
+
+		_veh setVariable ["A3W_objectTextures", _objTextures, true];
+	};
 };
 
 if (!isNil "_owner") then
@@ -168,10 +189,10 @@ if (!isNil "_backpacks") then
 	} forEach _backpacks;
 };
 
-if (!isNil "_turretMags" && !isNil "_turretMags3" && {_turretMags isEqualTo [] && _turretMags3 isEqualTo []}) then
+if (!isNil "_turretMags" && {_turretMags isEqualTo []}) then
 {
 	// for vehicles saved from A3 v1.56 and onwards, remove all default mags because empty ones are saved
-	{ _veh removeMagazineTurret [_x select 0, _x select 1] } forEach magazinesAllTurrets _veh;
+	{ _veh removeMagazineTurret (_x select [0,2]) } forEach magazinesAllTurrets _veh;
 }
 else
 {
@@ -181,6 +202,7 @@ else
 
 // Remove all turret weapons to ensure they are reloaded properly
 private _turretWeapons = _veh call fn_removeTurretWeapons;
+private _pylons = [];
 
 if (!isNil "_turretMags3") then
 {
@@ -190,18 +212,25 @@ if (!isNil "_turretMags3") then
 	{
 		_x params ["_mag", "_path", "_ammoCoef"];
 
-		_magPathStr = toLower (_mag + str _path);
-
-		if (_magPathStr in _magsAdded) then
+		if (_mag == "" || _mag select [0,5] == "Pylon") then // pylon stuff
 		{
-			_veh addMagazineTurret [_mag, _path];
+			_pylons pushBack _x;
 		}
-		else
+		else // legacy stuff
 		{
-			_magsAdded pushBack _magPathStr;
-		};
+			_magPathStr = toLower (_mag + str _path);
 
-		_veh setMagazineTurretAmmo [_mag, _ammoCoef * getNumber (configFile >> "CfgMagazines" >> _mag >> "count"), _path];
+			if (_magPathStr in _magsAdded) then
+			{
+				_veh addMagazineTurret [_mag, _path];
+			}
+			else
+			{
+				_magsAdded pushBack _magPathStr;
+			};
+
+			_veh setMagazineTurretAmmo [_mag, _ammoCoef * getNumber (configFile >> "CfgMagazines" >> _mag >> "count"), _path];
+		};
 	} forEach _turretMags3;
 };
 if (!isNil "_turretMags") then
@@ -216,9 +245,16 @@ if (!isNil "_turretMags2") then
 // Re-add all turret weapons to ensure they are reloaded properly
 { _veh addWeaponTurret _x } forEach _turretWeapons;
 
+// Restore pylons
+{
+	_x params ["_mag", "_path", "_ammo"];
+	_veh setPylonLoadOut [_forEachIndex + 1, _mag, true, _path];
+	_veh setAmmoOnPylon [_forEachIndex + 1, _ammo];
+} forEach _pylons;
+
 if (!isNil "_ammoCargo") then { _veh setAmmoCargo _ammoCargo };
 if (!isNil "_fuelCargo") then { _veh setFuelCargo _fuelCargo };
 if (!isNil "_repairCargo") then { _veh setRepairCargo _repairCargo };
 
-//reload _veh;
+reload _veh;
 _veh hideObjectGlobal false;

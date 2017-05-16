@@ -57,7 +57,6 @@ staticWeaponsList =
 staticHeliList =
 [
 	"C_Heli_Light_01_civil_F",
-	"C_Heli_Light_01_civil_F",
 	"B_Heli_Light_01_F",
 	"O_Heli_Light_02_unarmed_F",
 	"I_Heli_light_03_unarmed_F"
@@ -67,8 +66,7 @@ staticHeliList =
 //Object List - Random Planes.
 staticPlaneList =
 [
-	//["B_Plane_CAS_01_F", "O_Plane_CAS_02_F"],
-	"I_Plane_Fighter_03_AA_F",
+	"I_Plane_Fighter_03_dynamicLoadout_F",
 	"C_Plane_Civil_01_F"
 ];
 

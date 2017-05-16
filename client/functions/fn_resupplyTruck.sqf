@@ -36,18 +36,21 @@ _resupplyThread = [_vehicle, _unit] spawn
 	_vehName = getText (_vehCfg >> "displayName");
 	_isUAV = (round getNumber (_vehCfg >> "isUav") >= 1);
 	_isStaticWep = _vehClass isKindOf "StaticWeapon";
-	_isHighPrice = ["B_MBT_01_cannon_F","B_MBT_01_TUSK_F","O_MBT_02_cannon_F","I_MBT_03_cannon_F","B_Heli_Attack_01_F","O_Heli_Attack_02_F","B_T_UAV_03_F","B_T_VTOL_01_armed_F","O_T_VTOL_02_infantry_F","B_UAV_02_F","O_UAV_02_F","I_UAV_02_F","O_T_UAV_04_CAS_F","I_Plane_Fighter_03_CAS_F","B_Plane_CAS_01_F","O_Plane_CAS_02_F","B_UGV_01_rcws_F","I_UGV_01_rcws_F","O_UGV_01_rcws_F"];
+	_isHighPrice = ["B_MBT_01_cannon_F","B_MBT_01_TUSK_F","O_MBT_02_cannon_F","I_MBT_03_cannon_F","B_Heli_Attack_01_dynamicLoadout_F","O_Heli_Attack_02_dynamicLoadout_F","B_T_UAV_03_F","I_Plane_Fighter_03_dynamicLoadout_F","I_Plane_Fighter_04_F","B_Plane_Fighter_01_Stealth_F","B_Plane_Fighter_01_F","O_Plane_Fighter_02_Stealth_F","O_Plane_Fighter_02_F","B_Plane_CAS_01_dynamicLoadout_F","O_Plane_CAS_02_dynamicLoadout_F","B_T_VTOL_01_armed_F","O_T_VTOL_02_infantry_dynamicLoadout_F","B_UAV_02_dynamicLoadout_F","O_UAV_02_dynamicLoadout_F","I_UAV_02_dynamicLoadout_F","O_T_UAV_04_CAS_F","B_UAV_05_F","B_UGV_01_rcws_F","I_UGV_01_rcws_F","O_UGV_01_rcws_F"];
 
 	scopeName "resupplyTruckThread";
 
 	_price = 1000; // price = 1000 for vehicles not found in vehicle store
 
+	_variant = _vehicle getVariable ["A3W_vehicleVariant", ""];
+	if (_variant != "") then { _variant = "variant_" + _variant };
+
 	{
-		if (_vehClass == _x select 1) exitWith
+		if (_vehClass == _x select 1 && (_variant == "" || {_variant in _x})) exitWith
 		{
 			_price = _x select 2;
 
-			if (_vehicle in _isHighPrice) then
+			if ({_vehicle isKindOf _x} count _isHighPrice > 0) then
 			{
 				_price = round (_price / PRICE_RELATIONSHIP_HIGH);
 			}
@@ -215,7 +218,7 @@ _resupplyThread = [_vehicle, _unit] spawn
 		{
 			_x params ["_mag", "_path", "_ammo"];
 
-			if (_mag != "FakeWeapon") then
+			if (_mag != "FakeWeapon" && _mag select [0,5] != "Pylon") then
 			{
 				_pathArr = [_pathArrs, _path] call fn_getFromPairs;
 				_new = isNil "_pathArr";
@@ -280,6 +283,30 @@ _resupplyThread = [_vehicle, _unit] spawn
 			} forEach _magPairs;
 		} forEach _pathArrs;
 
+		_pylonPaths = (configProperties [_vehCfg >> "Components" >> "TransportPylonsComponent" >> "Pylons", "isClass _x"]) apply {getArray (_x >> "turret")};
+
+		{
+			if (_x != "") then
+			{
+				_magCfg = configFile >> "CfgMagazines" >> _x;
+
+				if (_vehicle ammoOnPylon (_forEachIndex + 1) < getNumber (_magCfg >> "count")) then
+				{
+					call _checkAbortConditions;
+
+					_text = format ["Reloading %1...", getText (_magCfg >> "displayName")];
+					_text call _titleText;
+
+					sleep (REARM_TIME_SLICE / 2);
+					call _checkAbortConditions;
+
+					_vehicle setPylonLoadOut [_forEachIndex + 1, _x, true, _pylonPaths select _forEachIndex];
+
+					sleep (REARM_TIME_SLICE / 2);
+				};
+			};
+		} forEach getPylonMagazines _vehicle;
+
 		[_vehicle, false, true, true] call A3W_fnc_setVehicleLoadout;
 
 		_checkDone = true;
@@ -332,6 +359,12 @@ _resupplyThread = [_vehicle, _unit] spawn
 			call _checkAbortConditions;
 			_vehicle setDamage 0;
 			_repaired = true;
+		};
+
+		// reset ejection seat crap
+		if (_vehicle isKindOf "Plane") then
+		{
+			{ _vehicle animate [_x, 0, true] } forEach ["canopy_hide", "ejection_seat_motion", "ejection_seat_hide"];
 		};
 
 		_checkDone = true;
