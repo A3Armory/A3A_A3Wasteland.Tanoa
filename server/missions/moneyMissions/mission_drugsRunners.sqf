@@ -85,7 +85,7 @@ _setupObjects =
 		_waypoint = _aiGroup addWaypoint [markerPos (_x select 0), 0];
 		_waypoint setWaypointType "MOVE";
 		_waypoint setWaypointCompletionRadius 50;
-		_waypoint setWaypointCombatMode "GREEN";
+		_waypoint setWaypointCombatMode "YELLOW";
 		_waypoint setWaypointBehaviour "CARELESS";
 		_waypoint setWaypointFormation "STAG COLUMN";
 		_waypoint setWaypointSpeed "FULL";
@@ -140,7 +140,7 @@ _successExec =
 		[_item, _lastPos] call _drop_item;
 	};
 
-	_cashamount = round(random 12500);
+	_cashamount = floor(random 12500);
 	_cashpile = selectRandom [2,3,4];
 
 	for "_i" from 1 to _cashpile do
