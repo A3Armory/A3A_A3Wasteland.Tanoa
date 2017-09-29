@@ -15,11 +15,7 @@
 #endif
 
 enableSaving [false, false];
-
-// block script injection exploit
-inGameUISetEventHandler ["PrevAction", ""];
-inGameUISetEventHandler ["Action", ""];
-inGameUISetEventHandler ["NextAction", ""];
+A3W_sessionTimeStart = diag_tickTime;
 
 _descExtPath = str missionConfigFile;
 currMissionDir = compileFinal str (_descExtPath select [0, count _descExtPath - 15]);
@@ -28,10 +24,10 @@ X_Server = false;
 X_Client = false;
 X_JIP = false;
 
-/*CHVD_allowNoGrass = false;
+CHVD_allowNoGrass = false;
 CHVD_allowTerrain = false; // terrain option has been disabled out from the menu due to terrible code, this variable has currently no effect
 CHVD_maxView = 3000; // Set maximum view distance (default: 12000)
-CHVD_maxObj = 3000;*/ // Set maximimum object view distance (default: 12000)
+CHVD_maxObj = 3000; // Set maximimum object view distance (default: 12000)
 
 // versionName = ""; // Set in STR_WL_WelcomeToWasteland in stringtable.xml
 
@@ -105,6 +101,7 @@ if (hasInterface || isServer) then
 	if (isNil "drn_DynamicWeather_MainThread") then { drn_DynamicWeather_MainThread = [] execVM "addons\scripts\DynamicWeatherEffects.sqf" };
 	[] execVM "addons\bounty\init.sqf";
 	[] execVM "addons\scripts\HvT.sqf"; // High Value Target
+	[] execVM "addons\AF_Keypad\AF_KP_vars.sqf";
 };
 
 // Server restart message

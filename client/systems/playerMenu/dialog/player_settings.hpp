@@ -178,7 +178,7 @@ class playerSettings {
 		class btnDistanceFar : w_RscButton {
 			idc = -1;
 			text = "View Distance";
-			onButtonClick = "[] spawn TAWVD_fnc_openTAWVD;";
+			onButtonClick = "call CHVD_fnc_openDialog";
 			x = 0.65;
 			y = 0.64;
 			w = 0.2625;
@@ -233,6 +233,14 @@ class playerSettings {
 			y = 0.54;
 			w = 0.2625;
 			h = 0.08;
+		};
+
+		class btnKillfeed : w_RscButton {
+			idc = -1;
+			text = "Killfeed";
+			onButtonClick = "with missionNamespace do { [] call A3W_fnc_killFeedMenu }";
+			x = 0.158; y = 0.57;
+			w = 0.125; h = 0.033 * safezoneH;
 		};
 	};
 };

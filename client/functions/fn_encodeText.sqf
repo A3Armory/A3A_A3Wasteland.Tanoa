@@ -4,25 +4,17 @@
 //	@file Name: fn_encodeText.sqf
 //	@file Author: AgentRev
 
-private ["_text", "_specialChars", "_convertTo", "_resultArr", "_idx"];
-_text = _this select 0;
+// convert special characters to their XML entities for subsequent use with parseText
+// https://en.wikipedia.org/wiki/Character_encodings_in_HTML#XML_character_references
 
-_specialChars = [34,38,60,62]; // "&<>
-_convertTo = [[38,113,117,111,116,59], [38,97,109,112,59], [38,108,116,59], [38,103,116,59]]; // &quot; &amp; &lt; &gt;
-
-_resultArr = [];
+private _specialChars = [38, 60, 62, 34, 39]; //  & < > " '
+private _convertTo = [[38,97,109,112,59], [38,108,116,59], [38,103,116,59], [38,113,117,111,116,59], [38,97,112,111,115,59]]; //  &amp; &lt; &gt; &quot; &apos;
+private _chars = [];
+private "_i";
 
 {
-	_idx = _specialChars find _x;
+	_i = _specialChars find _x;
+	if (_i isEqualTo -1) then { _chars pushBack _x } else { _chars append (_convertTo select _i) };
+} forEach toArray param [0,"",[""]];
 
-	if (_idx != -1) then
-	{
-		_resultArr append (_convertTo select _idx);
-	}
-	else
-	{
-		_resultArr pushBack _x;
-	};
-} forEach toArray _text;
-
-toString _resultArr
+toString _chars
